@@ -75,7 +75,7 @@
                             </div>
                             <span class="float-right my-auto mr-auto">
 											<i class="fas fa-arrow-circle-down text-white"></i>
-											<span class="text-white op-7"> {{round(\App\Models\Invoices::where('value_status' , 2)->count() / \App\Models\Invoices::count() *100,2)}}%</span>
+											<span class="text-white op-7"> {{$unpaid}}%</span>
 										</span>
                         </div>
                     </div>
@@ -97,7 +97,7 @@
                             </div>
                             <span class="float-right my-auto mr-auto">
 											<i class="fas fa-arrow-circle-up text-white"></i>
-											<span class="text-white op-7"> {{round(\App\Models\Invoices::where('value_status' , 1)->count() / \App\Models\Invoices::count() *100,2)}}%</span>
+											<span class="text-white op-7"> {{$paid}}%</span>
 										</span>
                         </div>
                     </div>
@@ -119,7 +119,7 @@
                             </div>
                             <span class="float-right my-auto mr-auto">
 											<i class="fas fa-arrow-circle-down text-white"></i>
-											<span class="text-white op-7"> {{round(\App\Models\Invoices::where('value_status' , 3)->count() / \App\Models\Invoices::count() *100,2)}}%</span>
+											<span class="text-white op-7"> {{$partial}}%</span>
 										</span>
                         </div>
                     </div>

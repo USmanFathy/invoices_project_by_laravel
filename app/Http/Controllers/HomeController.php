@@ -25,9 +25,23 @@ class HomeController extends Controller
     public function index()
     {
         $total_invoices = Invoices::count() ;
-        $unpaid_invoices = round(Invoices::where('value_status' , 2)->count() / $total_invoices *100 );
-        $paid_invoices = round(Invoices::where('value_status' , 1)->count() / $total_invoices *100 );
-        $partial_invoices = round(Invoices::where('value_status' , 3)->count() / $total_invoices *100 );
+                    if(Invoices::where('value_status' , 2)->count()){
+                        $unpaid_invoices = round(Invoices::where('value_status' , 2)->count() / $total_invoices *100 );
+                    }else{
+                        $unpaid_invoices = 0;
+                    }
+        if(Invoices::where('value_status' , 1)->count()){
+            $paid_invoices = round(Invoices::where('value_status' ,1)->count() / $total_invoices *100 );
+        }else{
+            $paid_invoices = 0;
+        }
+
+
+        if (Invoices::where('value_status' , 3)->count() ){
+            $partial_invoices = round(Invoices::where('value_status' , 3)->count() / $total_invoices *100 );
+        }else{
+            $partial_invoices = 0;
+        }
 
         $chartjs = app()->chartjs
             ->name('barChartTest')
@@ -67,6 +81,6 @@ class HomeController extends Controller
             ->options([]);
 
 
-        return view('home' ,['chartjs'=>$chartjs , 'chartjs2'=>$chartjs2]);
+        return view('home' ,['chartjs'=>$chartjs , 'chartjs2'=>$chartjs2 ,'partial'=>$partial_invoices , 'paid' =>$paid_invoices , 'unpaid' =>$unpaid_invoices]);
     }
 }

@@ -30,7 +30,7 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-//Auth::routes(['register'=>false]);
+Auth::routes(['register'=>false]);
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::resource('invoices_all' ,InvoicesController::class)->middleware('auth');
